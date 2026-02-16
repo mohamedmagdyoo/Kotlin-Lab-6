@@ -11,6 +11,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -106,13 +107,15 @@ fun task4() {
     }
 }
 
-fun task5(){
+fun task5() {
     runBlocking {
-       launch {  repeat(3){
-           println("In task5")
-           delay(3000)
-       } }
-
+        val bk_taks = launch {
+            repeat(3) {
+                println("In task5")
+                delay(1000)
+            }
+        }
+        bk_taks.join()
         println("After join")
     }
 }
